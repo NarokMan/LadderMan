@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://csmdk26qe3ryx"]
+
+[ext_resource type="Script" uid="uid://6ik05jlgj5cx" path="res://scripts/enemy.gd" id="1_gifcq"]
+[ext_resource type="Texture2D" uid="uid://dklhfcrym21g3" path="res://assets/ChristmasPants.png" id="2_gifcq"]
+
+[node name="TestEnemy3" type="CharacterBody2D" unique_id=2089782478]
+script = ExtResource("1_gifcq")
+kind = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1330564779]
+texture = ExtResource("2_gifcq")

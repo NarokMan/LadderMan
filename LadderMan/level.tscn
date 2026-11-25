@@ -1,24 +1,32 @@
 [gd_scene format=4 uid="uid://cgxbj5fqpdgv"]
 
-[ext_resource type="Texture2D" uid="uid://cmatddskl6mr1" path="res://icon.svg" id="1_u52ul"]
+[ext_resource type="Texture2D" path="res://assets/BananaChar.png" id="1_u52ul"]
 [ext_resource type="Script" uid="uid://bdr0k5i2vdflh" path="res://character_body_2d.gd" id="1_vonw3"]
 [ext_resource type="TileSet" uid="uid://dlsypkwalqeg7" path="res://assets/Ground/Ground_Set.tres" id="3_0b4ue"]
 [ext_resource type="Script" uid="uid://dr6upvrf3cvan" path="res://overlay.gd" id="4_f2txt"]
 [ext_resource type="Script" uid="uid://dv5a5kor4hor6" path="res://tile_map_layer.gd" id="7_km5ld"]
 
+[ext_resource type="Script" path="res://scripts/level_enemies.gd" id="level_ai"]
+[ext_resource type="Script" path="res://scripts/climb_ladder.gd" id="ladder"]
+
+[sub_resource type="RectangleShape2D" id="LandingShape"]
+size = Vector2(96, 8)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3gug"]
+size = Vector2(28, 38)
 
 [node name="level" type="Node2D" unique_id=678762349]
+script = ExtResource("level_ai")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1040120900]
 position = Vector2(200, 0)
 script = ExtResource("1_vonw3")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=15322032]
+scale = Vector2(0.15,0.15)
 texture = ExtResource("1_u52ul")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2093063931]
-scale = Vector2(6.4, 6.4)
 shape = SubResource("RectangleShape2D_u3gug")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1935408548]
@@ -33,3 +41,20 @@ show_behind_parent = true
 tile_map_data = PackedByteArray("AAD9/wMACQAAAAAAAAD+/wMABgAAAAAAAAD+/wIACAAAAAAAAAD//wIACAAAAAAAAAAAAAIACAAAAAAAAAACAAIACAAAAAAAAAADAAMACAAAAAAAAAAEAAMACAAAAAAAAAAFAAMACAAAAAAAAAAGAAMACAAAAAAAAAAGAAQACQAAAAAAAAAHAAQABgAAAAAAAAAHAAMACAAAAAAAAAD//wMACQAAAAAAAAAAAAMACAAAAAAAAAABAAMACAAAAAAAAAABAAIACAAAAAAAAAD8/wMABgAAAAAAAAACAAMACAAAAAAAAAAIAAQABgAAAAAAAAD8/wQABgAAAAAAAAD9/wQABgAAAAAAAAD+/wQACAAAAAAAAAAEAAQACAAAAAAAAAD//wQACAAAAAAAAAAAAAQABwAAAAAAAAABAAQABwAAAAAAAAACAAQABwAAAAAAAAADAAQACAAAAAAAAAAFAAEABwAAAAAAAAAFAAIABwAAAAAAAAAEAAIABwAAAAAAAAADAAIACQAAAAAAAAD9/wEACwAAAAAAAAD8/wIACwAAAAAAAAAGAAEABwAAAAAAAAAHAAEABwAAAAAAAAAIAAEABwAAAAAAAAAJAAEABwAAAAAAAAAKAAEABwAAAAAAAAALAAEABwAAAAAAAAAMAAEABwAAAAAAAAAMAAIACAAAAAAAAAALAAIACAAAAAAAAAALAAMACAAAAAAAAAALAAQACAAAAAAAAAAKAAQACAAAAAAAAAAKAAMACQAAAAAAAAAKAAIACAAAAAAAAAAJAAIACAAAAAAAAAAIAAIACAAAAAAAAAAHAAIACQAAAAAAAAAGAAIACAAAAAAAAAAIAAMACAAAAAAAAAAJAAMACAAAAAAAAAAJAAQACAAAAAAAAAAFAAQACAAAAAAAAAD9/wIACAAAAAAAAAD6/wQACwAAAAAAAAD7/wQACAAAAAAAAAD7/wMACwAAAAAAAAAMAAQACAAAAAAAAAAMAAMACAAAAAAAAAD+/wEABwAAAAAAAAD//wEABwAAAAAAAAAAAAEABwAAAAAAAAABAAEABwAAAAAAAAACAAEABwAAAAAAAAADAAEABwAAAAAAAAAEAAEABwAAAAAAAAA=")
 tile_set = ExtResource("3_0b4ue")
 script = ExtResource("7_km5ld")
+
+[node name="EnemySpawn" type="Marker2D" parent="."]
+position = Vector2(560, 20)
+
+[node name="ClimbLadder" type="Node2D" parent="."]
+position = Vector2(360, -116)
+script = ExtResource("ladder")
+
+[node name="Landing" type="StaticBody2D" parent="."]
+position = Vector2(294, -96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Landing"]
+shape = SubResource("LandingShape")
+
+[node name="Plank" type="Polygon2D" parent="Landing"]
+polygon = PackedVector2Array(-48, -4, 48, -4, 48, 4, -48, 4)
+color = Color(0.67, 0.49, 0.30, 1)

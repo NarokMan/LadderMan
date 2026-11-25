@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dux6d3ghdnx8w"]
+
+[ext_resource type="Script" uid="uid://6ik05jlgj5cx" path="res://scripts/enemy.gd" id="1_g2buw"]
+[ext_resource type="Texture2D" uid="uid://c2v0o022cbs5p" path="res://assets/Disco Pants.png" id="2_g2buw"]
+
+[node name="TestEnemy2" type="CharacterBody2D" unique_id=2089782478]
+script = ExtResource("1_g2buw")
+kind = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1330564779]
+texture = ExtResource("2_g2buw")
